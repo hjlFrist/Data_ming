@@ -1,0 +1,5 @@
+library(cluster)
+file=read.csv()
+pamx=pam(x,2)
+summary(pamx)
+plot(pamx,main='pam ¾ÛÀàĞ§¹ûÍ¼')

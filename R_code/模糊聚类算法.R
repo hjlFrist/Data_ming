@@ -1,0 +1,5 @@
+library(cluster)
+file=read.csv()
+fannyz=fanny(z,3,metric='SqEuclidean')
+summary(fannyz)
+plot(fannyz,main='Ä£ºı¾ÛÀàËã·¨')

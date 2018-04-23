@@ -1,9 +1,9 @@
 library(C50)
-a=read.csv('C:/Users/Administrator/Desktop/b.csv',header = T) # µ¼ÈëÊı¾İ
-b=a[1:(nrow(a)-5),]                # ÊµÑéÊı¾İ
-d=a[(nrow(a)-5):nrow(a),]          # Ä¿±êÊı¾İ
+a=read.csv('C:/Users/Administrator/Desktop/b.csv',header = T) # å¯¼å…¥æ•°æ®
+b=a[1:(nrow(a)-5),]                # å®éªŒæ•°æ®
+d=a[(nrow(a)-5):nrow(a),]          # ç›®æ ‡æ•°æ®
 
-for(i in 1:1000){
+for(i in 1:100){
   t=sample(1:nrow(b),replace = FALSE,size = 0.5*nrow(b))
   train=b[t,]
   test=b   
@@ -11,7 +11,7 @@ for(i in 1:1000){
     tryCatch(
       { 
         m=C5.0(train[,c(2,3,4,5,6,7)],train$Y4,trials = 10)
-        p=predict(m,test,type = "class") # Ê¹ÓÃÈ«¾ÖÊı¾İ²âÊÔ
+        p=predict(m,test,type = "class") # ä½¿ç”¨å…¨å±€æ•°æ®æµ‹è¯•
       }, warning = function(w) {
         ""
         
@@ -19,10 +19,10 @@ for(i in 1:1000){
         ""
       }
     )
-    agreement<- p==test$Y4 # Ô¤²âÀà±ğÓëÕæÊµÀà±ğÏàÍ¬
-    retrieved=length(test$Y4) # ËùÓĞ¸öÊı
-    precision=sum(agreement)/retrieved # ÕıÈ·¸öÊıÕ¼±È
-    print(precision) # ´òÓ¡ÕıÈ·ÂÊ
+    agreement<- p==test$Y4 # é¢„æµ‹ç±»åˆ«ä¸çœŸå®ç±»åˆ«ç›¸åŒ
+    retrieved=length(test$Y4) # æ‰€æœ‰ä¸ªæ•°
+    precision=sum(agreement)/retrieved # æ­£ç¡®ä¸ªæ•°å æ¯”
+    print(precision) # æ‰“å°æ­£ç¡®ç‡
     if(precision>0.7){
       break()
     }
@@ -34,8 +34,8 @@ p=predict(rule,d,type='class')
 d$people_predict=p
 print(d$people_predict)
 
-save(m,file="E:/R/rule.RData") # ±£´æÄ£ĞÍ£¬E:/R/day.RData ÎªÂ·¾¶ÓëÃû³Æ
-load("E:/R/rule.RData") # ¼ÓÔØÄ£ĞÍ
+save(m,file="E:/R/rule.RData") # ä¿å­˜æ¨¡å‹ï¼ŒE:/R/day.RData ä¸ºè·¯å¾„ä¸åç§°
+load("E:/R/rule.RData") # åŠ è½½æ¨¡å‹
 d=read.csv('C:/Users/Administrator/Desktop/d.csv',header = T)
-p=predict(m,d) # Ä£ĞÍÔËÓÃÔÚĞÂÊı¾İÉÏ£¬×ÔÑ¡ÔñÁĞ£¬ÁĞ±ØĞëÓëÔËËãÄ£ĞÍµÄ×Ô±äÁ¿Ò»ÖÂ
+p=predict(m,d) # æ¨¡å‹è¿ç”¨åœ¨æ–°æ•°æ®ä¸Šï¼Œè‡ªé€‰æ‹©åˆ—ï¼Œåˆ—å¿…é¡»ä¸è¿ç®—æ¨¡å‹çš„è‡ªå˜é‡ä¸€è‡´
 
